@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Video player example</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="inputfile.css">
+  <link rel="favicon" href="favicon.ico" />
+</head>
+
+<body>
+  <div class="vidselect"> 
+    <input type="text" id="tbClipPath" placeholder="clipPath" />
+
+    <input type="file" id="files" name="files" class="inputfile" data-multiple-caption="{count} files selected" multiple />
+    <label for="files">
+      <svg height="1792" viewBox="0 0 1792 1792" width="1792" xmlns="http://www.w3.org/2000/svg"><path d="M1596 380q28 28 48 76t20 88v1152q0 40-28 68t-68 28h-1344q-40 0-68-28t-28-68v-1600q0-40 28-68t68-28h896q40 0 88 20t76 48zm-444-244v376h376q-10-29-22-41l-313-313q-12-12-41-22zm384 1528v-1024h-416q-40 0-68-28t-28-68v-416h-768v1536h1280zm-640-896q52 0 90 38t38 90v384q0 52-38 90t-90 38h-384q-52 0-90-38t-38-90v-384q0-52 38-90t90-38h384zm492 2q20 8 20 30v576q0 22-20 30-8 2-12 2-14 0-23-9l-265-266v-90l265-266q9-9 23-9 4 0 12 2z"/></svg>
+      <span>Select Video Clips...</span>
+    </label>
+
+  </div>
+
+
+  <div class="player">
+    <video id="vidL">
+      <source type="video/mp4" muted="muted" class="active" />
+      Your browser does not support the video tag.
+    </video>
+
+    <video id="vidF">
+      <source type="video/mp4" muted="muted" class="active" />
+    </video>
+
+    <video id="vidR">
+      <source type="video/mp4" muted="muted" class="active" />
+    </video>
+
+    <div class="controls">
+      <button class="play"  data-icon="P"></button>
+      <button class="stop"  data-icon="S"></button>
+      <div class="timer"><div></div><span>00:00</span></div>
+      <input type="range" min="0" max="59" value="0" class="slider">
+      <button class="prior" data-icon="B"></button>
+      <button class="rwd"   data-icon="B"></button>
+      <button class="fwd"   data-icon="F"></button>
+      <button class="next"  data-icon="F"></button>
+    </div>
+  </div>
+  <div id="currentFile"></div>
+
+  <footer>
+    &copy; copyright BitJunky | <a href="https://github.com/gigajunky">https://github.com/gigajunky</a>.
+  </footer>
+  <script src="TeslaCamPlayer.js"></script>
+</body>
+</html>

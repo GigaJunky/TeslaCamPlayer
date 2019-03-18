@@ -1,0 +1,128 @@
+@font-face {
+    font-family: 'HeydingsControlsRegular';
+    src: url('fonts/heydings_controls-webfont.eot');
+    src: url('fonts/heydings_controls-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/heydings_controls-webfont.woff') format('woff'),
+         url('fonts/heydings_controls-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+body{color: white; background-color: black}
+
+.vidselect { display: flex}
+#tbClipPath{width: 85%; font-size: x-large}
+#currentFile { text-align: center }
+.player:hover .controls, player:focus .controls { opacity: 1; position: absolute }
+
+.controls {
+  opacity: 0.25;
+  width: 400px;
+  border-radius: 10px;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  margin-left: -200px;
+  background-color: black;
+  box-shadow: 3px 3px 5px gray;
+  transition: 1s all;
+  display: flex;
+}
+
+button, .controls { background: linear-gradient(to bottom,#222,#666) }
+button:hover,button:focus { box-shadow: inset 1px 1px 2px black }
+button:active { box-shadow: inset 3px 3px 2px black }
+button:before {
+  font-family: HeydingsControlsRegular;
+  font-size: 20px;
+  position: relative;
+  content: attr(data-icon);
+  color: #aaa;
+  text-shadow: 1px 1px 0px black;
+}
+
+
+button, .timer {
+  height: 38px;
+  line-height: 19px;
+  box-shadow: inset 0 -5px 25px rgba(0,0,0,0.3);
+  border-right: 1px solid #333;
+}
+
+button { position: relative; border: 0; flex: 1; outline: none }
+.next  { border-radius: 0 10px 10px 0 }
+.play { border-radius: 10px 0 0 10px }
+.play:before { font-size: 22px }
+
+.timer {
+  line-height: 38px;
+  font-size: 16px;
+  font-family: monospace;
+  text-shadow: 1px 1px 0px gray;
+  color: white;
+  flex: 5;
+  position: relative;
+}
+
+.timer div {
+  position: absolute;
+  background-color: rgba(255,255,255,0.2);
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 38px;
+  z-index: 2;
+}
+
+.timer span { position: absolute; left: 75px; height: 8px; z-index: 1; user-select: none; -moz-user-select: none;}
+.active:before { color: red }
+
+body { font-family: "Helvetica Neue", Arial, sans-serif }
+video { border: 1px solid rgba(0, 0, 0, 0.925); width: 33% }
+p { position: absolute;  top: 310px }
+
+footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1px;
+  background-color: gray;
+  text-align: center;
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 38px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */ 
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 10px; /* Set a specific slider handle width */
+  height: 38px; /* Slider handle height */
+  background: gray; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+  border-radius: 10%; 
+}
+
+.slider::-moz-range-thumb {
+  width: 10px; /* Set a specific slider handle width */
+  height: 38px; /* Slider handle height */
+  background: gray; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+  border-radius: 10%; 
+}
