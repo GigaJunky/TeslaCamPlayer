@@ -36,6 +36,10 @@ function loadClip(clipName) {
 vidF.addEventListener('ended', function () {
   setTimeout(() => playNextMedia(), 100)
 })
+vidF.addEventListener('error', function () {
+    alert('Failed to load Video Clip.  Make sure clip path is correct.')
+})
+
 
 document.querySelector('.next').addEventListener('click', playNextMedia)
 function playNextMedia() {
