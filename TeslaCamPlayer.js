@@ -9,50 +9,78 @@ let vidA = document.querySelectorAll('video')
   , rwd = document.querySelector('.rwd')
   , fwd = document.querySelector('.fwd')
   , slider = document.querySelector(".slider")
-  , tbClipPath = document.querySelector('#tbClipPath')
+  //, tbClipPath = document.querySelector('#tbClipPath')
   , currentClipIndex = 0
   , intervalFwd, intervalRwd
   , skipInterval = 200, skipTime = 3
-, clipNames = localStorage.getItem('clipNames')
-if(clipNames != null) clipNames = JSON.parse(localStorage.getItem('clipNames'))
+  //, clipNames = []
+  , files = []
+//localStorage.getItem('clipNames')
+/*
+chrome.storage.local.get('clipNames', function (result) {
+  console.log('chrome storage: ', result)
+  if(result) clipNames = JSON.parse(result.clipNames)
+})
 
-tbClipPath.value = localStorage.getItem('ClipPath')
+chrome.storage.local.get('files', function (result) {
+  console.log('chrome storage: ', result)
+  if(result) files = JSON.parse(result)
+})
+
+chrome.storage.local.get('ClipPath', function (result) {
+  console.log('chrome storage ClipPath: ', result.ClipPath)
+  tbClipPath.value = result.ClipPath
+})
+
+//tbClipPath.value = chrome.localStorage.getItem('ClipPath')
 tbClipPath.addEventListener('change', function () {
   console.log('tbClipPath', tbClipPath.value)
-  localStorage.setItem('ClipPath', tbClipPath.value)
+  //localStorage.setItem('ClipPath', tbClipPath.value)
+  chrome.storage.local.set({'ClipPath': tbClipPath.value})
 })
 
 if (clipNames !== null && clipNames.length > 0) loadClip(clipNames[0])
 
-function loadClip(clipName) {
-  let clipPath = 'file:///' + tbClipPath.value + '/'
+function loadClipX(clipName) {
+  let clipPath =  'file:///' + tbClipPath.value + '/' 
   document.querySelector('#currentFile').innerHTML = clipName
   console.log('loadclip: ', clipPath + clipName)
   vidL.src = clipPath + clipName + '-left_repeater.mp4'
   vidF.src = clipPath + clipName + '-front.mp4'
   vidR.src = clipPath + clipName + '-right_repeater.mp4'
 }
+*/
+
+function loadClip(i) {
+  console.log('loadclip2: ', i)
+  clipName = files[i].name.substr(0, 16)
+  document.querySelector('#currentFile').innerHTML = clipName
+
+  vidL.src = URL.createObjectURL(files[i * 3  + 1])
+  vidF.src = URL.createObjectURL(files[i * 3])
+  vidR.src = URL.createObjectURL(files[i * 3 + 2])
+}
 
 vidF.addEventListener('ended', function () {
   setTimeout(() => playNextMedia(), 100)
 })
 vidF.addEventListener('error', function () {
-    alert('Failed to load Video Clip.  Make sure clip path is correct.')
+    console.log('Failed to load Video Clip.  Make sure clip path is correct.')
 })
 
 
 document.querySelector('.next').addEventListener('click', playNextMedia)
 function playNextMedia() {
-  if (currentClipIndex < clipNames.length - 2) currentClipIndex++
-  clipName = clipNames[currentClipIndex]
-  loadClip(clipName)
+  if (currentClipIndex < files.length / 3 - 2) currentClipIndex++
+  //clipName = clipNames[currentClipIndex]
+  loadClip(currentClipIndex)
   playPauseMedia()
 }
 
 document.querySelector('.prior').addEventListener('click', function () {
   if (currentClipIndex > 0) currentClipIndex--
-  clipName = clipNames[currentClipIndex]
-  loadClip(clipName)
+  //clipName = clipNames[currentClipIndex]
+  loadClip(currentClipIndex)
   playPauseMedia()
 })
 
@@ -142,14 +170,21 @@ slider.addEventListener('input', function () {
 })
 
 document.getElementById("files").addEventListener("change", function (event) {
-  let files = event.target.files
+  files = event.target.files
+  console.log(files)
+  /*
   clipNames = []
   for (let i = 0; i < files.length; i++)
-    if (files[i].name.endsWith('-front.mp4')) clipNames.push(files[i].name.substr(0, 16))
-
-  localStorage.setItem('clipNames', JSON.stringify(clipNames))
-  clipNames = clipNames.sort()
+    if (files[i].name.endsWith('-front.mp4')){
+     clipNames.push(files[i].name.substr(0, 16))
+    }
+  */
+  //localStorage.setItem('clipNames', JSON.stringify(clipNames))
+  //chrome.storage.local.set({'clipNames': JSON.stringify(clipNames)})
+  //chrome.storage.local.set({'files': JSON.stringify(files)})
+  //clipNames = clipNames.sort()
   currentClipIndex = 0
-  loadClip(clipNames[0])
+  loadClip(0)
+
 }, false)
 
