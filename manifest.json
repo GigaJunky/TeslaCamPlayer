@@ -1,11 +1,26 @@
 {
-  "name": "Teslacam Player",
-  "version": "1.0",
-  "manifest_version": 2,
-  "minimum_chrome_version": "33.0.1715.0",
-  "app": { "background": { "scripts": ["launch.js"] } },
-  "icons": {
-    "16" : "icons/tesla16.png",
-    "128": "icons/tesla128.png"
+    "short_name": "Tesla Player",
+    "name": "Teslacam Player",
+    "icons": [
+      {
+        "src": "/icons/tesla196.png",
+        "type": "image/png",
+        "sizes": "196x196"
+      },
+      {
+        "src": "/icons/tesla128.png",
+        "type": "image/png",
+        "sizes": "128x128"
+      },
+      {
+        "src": "/icons/tesla16.png",
+        "type": "image/png",
+        "sizes": "16x16"
+      }
+    ],
+    "start_url": "index.html",
+    "background_color": "black",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "black"
   }
-}
